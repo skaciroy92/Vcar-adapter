@@ -30,7 +30,7 @@ public class OBDDeviceData extends AdapterBase {
 		byte[] verBytes;
 		try {
 			logger.info("Protocol Version HexStr {}",hexStr);
-			verBytes = Hex.decodeHex(hexStr);
+			verBytes = Hex.decodeHex(hexStr.toCharArray());
 			String binString = String.format("%8s", Integer.toBinaryString(verBytes[0] & 0xFF)).replace(' ', '0')
 					+ String.format("%8s", Integer.toBinaryString(verBytes[1] & 0xFF)).replace(' ', '0');
 			
@@ -52,7 +52,7 @@ public class OBDDeviceData extends AdapterBase {
 		byte[] verBytes;
 		try {
 			logger.info("Hardware Version HexStr {}",hexStr);
-			verBytes = Hex.decodeHex(hexStr);
+			verBytes = Hex.decodeHex(hexStr.toCharArray());
 			String binString = String.format("%8s", Integer.toBinaryString(verBytes[0] & 0xFF)).replace(' ', '0')
 					+ String.format("%8s", Integer.toBinaryString(verBytes[1] & 0xFF)).replace(' ', '0');
 			
@@ -74,7 +74,7 @@ public class OBDDeviceData extends AdapterBase {
 		byte[] verBytes;
 		try {
 			logger.info("setSoftWareVersionMCU HexStr {}",hexStr);
-			verBytes = Hex.decodeHex(hexStr);
+			verBytes = Hex.decodeHex(hexStr.toCharArray());
 			int mculen = verBytes[0]&0x1F;
 			this.softWareVersionMCU = new String(Arrays.copyOfRange(verBytes, 1, mculen+1) );
 			int modLen = verBytes[mculen+1] & 0x1F;

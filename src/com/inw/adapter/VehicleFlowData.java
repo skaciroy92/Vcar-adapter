@@ -111,7 +111,7 @@ public class VehicleFlowData extends AdapterBase implements OBDDataSection{
 	public void setRPM(String RPM) {
 		this.RPM = RPM;
 		try {
-			byte[] hexByte = Hex.decodeHex(RPM);
+			byte[] hexByte = Hex.decodeHex(RPM.toCharArray());
 			logger.info("RPM = " + RPM + " hexByte len =" + hexByte.length);
 			this.RPM_int = (int)ByteBuffer.wrap(hexByte).getShort();
 		} catch (DecoderException e) {
@@ -128,7 +128,7 @@ public class VehicleFlowData extends AdapterBase implements OBDDataSection{
 	public void setSpeed(String Speed) {
 		this.Speed = Speed;
 		try {
-			this.Speed_int = (int)ByteBuffer.wrap(Hex.decodeHex(Speed)).getShort();
+			this.Speed_int = (int)ByteBuffer.wrap(Hex.decodeHex(Speed.toCharArray())).getShort();
 		} catch (DecoderException e) {
 			logger.error("Exception occured: ",e);
 		}
@@ -144,7 +144,7 @@ public class VehicleFlowData extends AdapterBase implements OBDDataSection{
 		this.EngineCoolantTemperature = EngineCoolantTemperature;
 		try {
 			final int CoolantOffSet = -40;
-			this.EngineCoolantTemperature_int = (int)ByteBuffer.wrap(Hex.decodeHex(EngineCoolantTemperature)).getShort();
+			this.EngineCoolantTemperature_int = (int)ByteBuffer.wrap(Hex.decodeHex(EngineCoolantTemperature.toCharArray())).getShort();
 			this.EngineCoolantTemperature_int = this.EngineCoolantTemperature_int + CoolantOffSet;
 		} catch (DecoderException e) {
 			logger.error("Exception occured: ",e);
@@ -160,7 +160,7 @@ public class VehicleFlowData extends AdapterBase implements OBDDataSection{
 	public void setThrottlePosition(String ThrottlePosition) {
 		this.ThrottlePosition = ThrottlePosition;
 		try {
-			this.ThrottlePosition_float = (float)ByteBuffer.wrap(Hex.decodeHex(ThrottlePosition)).getShort();
+			this.ThrottlePosition_float = (float)ByteBuffer.wrap(Hex.decodeHex(ThrottlePosition.toCharArray())).getShort();
 		} catch (DecoderException e) {
 			logger.error("Exception occured: ",e);
 		}		
@@ -215,7 +215,7 @@ public class VehicleFlowData extends AdapterBase implements OBDDataSection{
 	public void setBatteryVoltage(String BatteryVoltage) {
 		this.BatteryVoltage = BatteryVoltage;
 		try {
-			this.BatteryVoltage_float = (float) (ByteBuffer.wrap(Hex.decodeHex(BatteryVoltage)).getShort() * 0.1);
+			this.BatteryVoltage_float = (float) (ByteBuffer.wrap(Hex.decodeHex(BatteryVoltage.toCharArray())).getShort() * 0.1);
 		} catch (DecoderException e) {
 			logger.error("Exception occured: ",e);
 		}		
@@ -230,7 +230,7 @@ public class VehicleFlowData extends AdapterBase implements OBDDataSection{
 	public void setFLIFuelLevelInput(String FLIFuelLevelInput) {
 		this.FLIFuelLevelInput = FLIFuelLevelInput;
 		try {
-			this.FLIFuelLevelInput_float = (float) (ByteBuffer.wrap(Hex.decodeHex(FLIFuelLevelInput)).getShort() * 0.01);
+			this.FLIFuelLevelInput_float = (float) (ByteBuffer.wrap(Hex.decodeHex(FLIFuelLevelInput.toCharArray())).getShort() * 0.01);
 		} catch (DecoderException e) {
 			logger.error("Exception occured: ",e);
 		}		
@@ -246,7 +246,7 @@ public class VehicleFlowData extends AdapterBase implements OBDDataSection{
 		this.DistanceSinceDTCClear = DistanceSinceDTCClear;
 		try {
 			logger.info("KM->DTC Hex {}",DistanceSinceDTCClear);
-			this.DistanceSinceDTCClear_int = Short.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(DistanceSinceDTCClear)).getShort());
+			this.DistanceSinceDTCClear_int = Short.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(DistanceSinceDTCClear.toCharArray())).getShort());
 			logger.info("DistanceSinceDTCClear_int {}",DistanceSinceDTCClear_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
@@ -273,7 +273,7 @@ public class VehicleFlowData extends AdapterBase implements OBDDataSection{
 		this.HistoricalTotalMileage = HistoricalTotalMileage;
 		try {
 			logger.info("HistoricalTotalMileage Hex {}",this.HistoricalTotalMileage);			
-			this.HistoricalTotalMileage_int = Integer.toUnsignedLong(ByteBuffer.wrap(Hex.decodeHex(HistoricalTotalMileage)).getInt());
+			this.HistoricalTotalMileage_int = Integer.toUnsignedLong(ByteBuffer.wrap(Hex.decodeHex(HistoricalTotalMileage.toCharArray())).getInt());
 			logger.info("HistoricalTotalMileage_int {}",this.HistoricalTotalMileage_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
@@ -289,7 +289,7 @@ public class VehicleFlowData extends AdapterBase implements OBDDataSection{
 	public void setHistoricalTotalFuelConsumption(String HistoricalTotalFuelConsumption) {
 		this.HistoricalTotalFuelConsumption = HistoricalTotalFuelConsumption;
 		try {
-			this.HistoricalTotalFuelConsumption_int = ByteBuffer.wrap(Hex.decodeHex(HistoricalTotalFuelConsumption)).getInt();
+			this.HistoricalTotalFuelConsumption_int = ByteBuffer.wrap(Hex.decodeHex(HistoricalTotalFuelConsumption.toCharArray())).getInt();
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
 		}			
@@ -304,7 +304,7 @@ public class VehicleFlowData extends AdapterBase implements OBDDataSection{
 	public void setHistoricalTotalDrivingTime(String HistoricalTotalDrivingTime) {
 		this.HistoricalTotalDrivingTime = HistoricalTotalDrivingTime;
 		try {
-			this.HistoricalTotalDrivingTime_int = ByteBuffer.wrap(Hex.decodeHex(HistoricalTotalDrivingTime)).getInt();
+			this.HistoricalTotalDrivingTime_int = ByteBuffer.wrap(Hex.decodeHex(HistoricalTotalDrivingTime.toCharArray())).getInt();
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
 		}		

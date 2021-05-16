@@ -597,7 +597,7 @@ public class ThingWorxClientForOBD extends ConnectedThingClient {
      	String imeiNumber = deviceIDHex;
  		byte[] imeiBytes =  null;
  		try {
- 			imeiBytes = Hex.decodeHex(deviceIDHex);
+ 			imeiBytes = Hex.decodeHex(deviceIDHex.toCharArray());
  		} catch (DecoderException e) {
  			LOG.error(e.toString());
  		}    		

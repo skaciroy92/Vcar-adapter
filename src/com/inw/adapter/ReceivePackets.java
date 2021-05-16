@@ -34,7 +34,7 @@ public class ReceivePackets extends AdapterBase {
 		String frameData = ack.getFrameType() + ack.getFrameNumber() + ack.getEffectiveDataLength()
 				+ ack.getSessionType() + ack.getUtcTime();
 
-		byte[] ackBytes = Hex.decodeHex(frameHeader + frameData);
+		byte[] ackBytes = Hex.decodeHex((frameHeader + frameData).toCharArray());
 
 		Checksum checksum = new Adler32();
 		checksum.update(ackBytes, 0, ackBytes.length);
@@ -47,14 +47,14 @@ public class ReceivePackets extends AdapterBase {
 		
 		String mcuKey = MCUKeyManager.getInstance().getMCUKeyForIMEINumber(decryptedData.getDeviceId());
 		
-		String encryptedPacket = Hex.encodeHexString(encrypt(Hex.decodeHex(ackPacket), Hex.decodeHex(mcuKey)));
+		String encryptedPacket = Hex.encodeHexString(encrypt(Hex.decodeHex(ackPacket.toCharArray()), Hex.decodeHex(mcuKey.toCharArray())));
 
 		String finalAckPacket = ack.getHeader() + frameHeader + encryptedPacket + "AAAA";
 		//logger.info("Ack packet " + finalAckPacket);
 
 		try {
 			DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-			dout.write(Hex.decodeHex(finalAckPacket));
+			dout.write(Hex.decodeHex(finalAckPacket.toCharArray()));
 			dout.flush();
 		} catch (DecoderException e) {
 			// TODO Auto-generated catch block
@@ -88,7 +88,7 @@ public class ReceivePackets extends AdapterBase {
 		String frameData = ack.getFrameType() + ack.getFrameNumber() + "0002" + ack.getDataTypeMajor()
 				+ ack.getDataTypeMinor();
 
-		byte[] ackBytes = Hex.decodeHex(frameHeader + frameData);
+		byte[] ackBytes = Hex.decodeHex((frameHeader + frameData).toCharArray());
 
 		Checksum checksum = new Adler32();
 		checksum.update(ackBytes, 0, ackBytes.length);
@@ -100,14 +100,14 @@ public class ReceivePackets extends AdapterBase {
 		String ackPacket = frameData + checksumString + "ffffffffff";
 		
 		String mcuKey = MCUKeyManager.getInstance().getMCUKeyForIMEINumber(dataPacket.getDeviceId());		
-		String encryptedPacket = Hex.encodeHexString(encrypt(Hex.decodeHex(ackPacket), Hex.decodeHex(mcuKey)));
+		String encryptedPacket = Hex.encodeHexString(encrypt(Hex.decodeHex(ackPacket.toCharArray()), Hex.decodeHex(mcuKey.toCharArray())));
 
 		String finalAckPacket = ack.getHeader() + frameHeader + encryptedPacket + "AAAA";
 		logger.info("Ack packet " + finalAckPacket);
 
 		try {
 			DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-			dout.write(Hex.decodeHex(finalAckPacket));
+			dout.write(Hex.decodeHex(finalAckPacket.toCharArray()));
 			dout.flush();
 		} catch (DecoderException e) {
 			logger.error("Exception occured: ",e);
@@ -469,7 +469,7 @@ public class ReceivePackets extends AdapterBase {
 				+ ack.getDeviceId();
 		String frameData = ack.getFrameType() + ack.getFrameNumber() + ack.getEffectiveDataLength();
 
-		byte[] ackBytes = Hex.decodeHex(frameHeader + frameData);
+		byte[] ackBytes = Hex.decodeHex((frameHeader + frameData).toCharArray());
 
 		Checksum checksum = new Adler32();
 		checksum.update(ackBytes, 0, ackBytes.length);
@@ -483,14 +483,14 @@ public class ReceivePackets extends AdapterBase {
 		
 		String mcuKey = MCUKeyManager.getInstance().getMCUKeyForIMEINumber(dataPacket.getDeviceId());		
 
-		String encryptedPacket = Hex.encodeHexString(encrypt(Hex.decodeHex(ackPacket), Hex.decodeHex(mcuKey)));
+		String encryptedPacket = Hex.encodeHexString(encrypt(Hex.decodeHex(ackPacket.toCharArray()), Hex.decodeHex(mcuKey.toCharArray())));
 
 		String finalAckPacket = ack.getHeader() + frameHeader + encryptedPacket + "AAAA";
 		logger.info("PING Ack packet " + finalAckPacket);
 
 		try {
 			DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-			dout.write(Hex.decodeHex(finalAckPacket));
+			dout.write(Hex.decodeHex(finalAckPacket.toCharArray()));
 			dout.flush();
 		} catch (DecoderException e) {
 			logger.error(e.toString());

@@ -59,7 +59,7 @@ public class MCUKeyManager extends AdapterBase {
     	if(imeiNumber.length() == 30) { //If the imei number (17 char long) comes in Hex encode format, do conversion.
 			byte[] imeiBytes =  null;
 			try { 
-				imeiBytes = Hex.decodeHex(imeiNumber);
+				imeiBytes = Hex.decodeHex(imeiNumber.toCharArray());
 			} catch (DecoderException e) {
 				logger.error(e.toString());
 			}    		

@@ -57,7 +57,7 @@ public class DTCErrorCode extends AdapterBase implements OBDDataSection {
 		this.dtcErroCode_str = hexStr;
 		logger.info("dtcErroCode_str {}",dtcErroCode_str);
 		try {
-			byte[] dtcBytes = Hex.decodeHex(hexStr);
+			byte[] dtcBytes = Hex.decodeHex(hexStr.toCharArray());
 			int obdCodeLen = dtcBytes[0];
 			{
 				for(int i =1 ; i <= obdCodeLen * 3; i+=3) {

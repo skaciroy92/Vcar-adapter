@@ -30,7 +30,7 @@ public class GPSData extends AdapterBase {
 			{
 				String longHexStr = hexStr.substring(12, 20);
 				//logger.info("LONGITUDE HEX STR:{} ", longHexStr);
-				byte[] LongitudeBytes = Hex.decodeHex(longHexStr);
+				byte[] LongitudeBytes = Hex.decodeHex(longHexStr.toCharArray());
 //				String longiBin1 = String.format("%8s", Integer.toBinaryString(LongitudeBytes[0] & 0xFF)).replace(' ', '0')
 //								+ String.format("%8s", Integer.toBinaryString(LongitudeBytes[1] & 0xFF)).replace(' ', '0')
 //								+ String.format("%8s", Integer.toBinaryString(LongitudeBytes[2] & 0xFF)).replace(' ', '0')
@@ -51,7 +51,7 @@ public class GPSData extends AdapterBase {
 			{
 				String latHexStr = hexStr.substring(20, 26);
 				//logger.info("LONGITUDE HEX STR:{} ", latHexStr);				
-				byte[] LatBytes = Hex.decodeHex(latHexStr);
+				byte[] LatBytes = Hex.decodeHex(latHexStr.toCharArray());
 				String latiBin =String.format("%8s", Integer.toBinaryString(LatBytes[0] & 0xFF)).replace(' ', '0')
 						+ String.format("%8s", Integer.toBinaryString(LatBytes[1] & 0xFF)).replace(' ', '0')
 						+ String.format("%8s", Integer.toBinaryString(LatBytes[2] & 0xFF)).replace(' ', '0');
@@ -76,7 +76,7 @@ public class GPSData extends AdapterBase {
 			{
 				String angleHexStr = hexStr.substring(28, 32);
 				logger.info("HEADING ANGLE HEX STR:{} ", angleHexStr);
-				byte[] angleBytes = Hex.decodeHex(angleHexStr);
+				byte[] angleBytes = Hex.decodeHex(angleHexStr.toCharArray());
 				angleBytes[0] = (byte)( angleBytes[0] & 3); //Take LSB 2 Bits from first byte
 				String angleBin = String.format("%8s", Integer.toBinaryString(angleBytes[0] & 0xFF)).replace(' ', '0')
 						+ String.format("%8s", Integer.toBinaryString(angleBytes[1] & 0xFF)).replace(' ', '0');			

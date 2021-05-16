@@ -63,7 +63,7 @@ public class OBDDongleStateData extends AdapterBase {
 	
 	public void setState_PowerONAfterRebootType(String lengthHexStr) {
 		try {
-			state_PowerONAfterRebootType = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr)).get();
+			state_PowerONAfterRebootType = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr.toCharArray())).get();
 			logger.info("state_PowerONAfterRebootType : ", state_PowerONAfterRebootType);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);
@@ -78,7 +78,7 @@ public class OBDDongleStateData extends AdapterBase {
 	
 	public void setState_WakeUpType(String lengthHexStr) {
 		try {
-			state_WakeUpType = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr)).get();
+			state_WakeUpType = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr.toCharArray())).get();
 			logger.info("State_WakeUpType : ", state_WakeUpType);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);
@@ -107,7 +107,7 @@ public class OBDDongleStateData extends AdapterBase {
 	}
 	public void setState_WakeUpVoltage(String hexStr) {
 		try {
-			state_WakeUpVoltage = (double)ByteBuffer.wrap(Hex.decodeHex(hexStr)).getShort() * 0.1;
+			state_WakeUpVoltage = (double)ByteBuffer.wrap(Hex.decodeHex(hexStr.toCharArray())).getShort() * 0.1;
 			logger.info("state_WakeUpVoltage : ", state_WakeUpVoltage);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);
@@ -122,7 +122,7 @@ public class OBDDongleStateData extends AdapterBase {
 	
 	public void setState_SleepVoltage(String hexStr) {
 		try {
-			state_SleepVoltage = (double)ByteBuffer.wrap(Hex.decodeHex(hexStr)).getShort() * 0.1;
+			state_SleepVoltage = (double)ByteBuffer.wrap(Hex.decodeHex(hexStr.toCharArray())).getShort() * 0.1;
 			logger.info("state_SleepVoltage : ", state_SleepVoltage);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);
@@ -169,7 +169,7 @@ public class OBDDongleStateData extends AdapterBase {
 	
 	public void setState_UpgradeStatus(String lengthHexStr) {
 		try {
-			state_UpgradeStatus = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr)).get();
+			state_UpgradeStatus = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr.toCharArray())).get();
 			logger.info("State_UpgradeStatus : ", state_UpgradeStatus);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);

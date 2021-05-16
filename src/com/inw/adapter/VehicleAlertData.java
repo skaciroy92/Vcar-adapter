@@ -111,7 +111,7 @@ public class VehicleAlertData extends AdapterBase implements OBDDataSection {
 		Alert_BatteryVoltage_str = alert_BatteryVoltage_str;
 		try {
 			logger.info("Alert_BatteryVoltage_str {}",Alert_BatteryVoltage_str);
-			this.Alert_BatteryVoltage = ByteBuffer.wrap(Hex.decodeHex(Alert_BatteryVoltage_str)).getShort() *0.1;
+			this.Alert_BatteryVoltage = ByteBuffer.wrap(Hex.decodeHex(Alert_BatteryVoltage_str.toCharArray())).getShort() *0.1;
 			logger.info("Alert_BatteryVoltage {}",Alert_BatteryVoltage);
 			
 		} catch (DecoderException e) {
@@ -123,7 +123,7 @@ public class VehicleAlertData extends AdapterBase implements OBDDataSection {
 		Alert_DevicePulledoutState_str = alert_DevicePulledoutState_str;
 		try {
 			logger.info("Alert_DevicePulledoutState_str {}",Alert_DevicePulledoutState_str);
-			this.Alert_DevicePulledoutState = ByteBuffer.wrap(Hex.decodeHex(Alert_DevicePulledoutState_str)).get();
+			this.Alert_DevicePulledoutState = ByteBuffer.wrap(Hex.decodeHex(Alert_DevicePulledoutState_str.toCharArray())).get();
 			logger.info("Alert_DevicePulledoutState {}",Alert_DevicePulledoutState);
 			
 		} catch (DecoderException e) {
@@ -135,7 +135,7 @@ public class VehicleAlertData extends AdapterBase implements OBDDataSection {
 		Alert_SuspectedCollision_str = alert_SuspectedCollision_str;
 		try {
 			logger.info("Alert_SuspectedCollision_str {}",Alert_SuspectedCollision_str);
-			this.Alert_SuspectedCollision = ByteBuffer.wrap(Hex.decodeHex(Alert_SuspectedCollision_str)).get() * 0.1;
+			this.Alert_SuspectedCollision = ByteBuffer.wrap(Hex.decodeHex(Alert_SuspectedCollision_str.toCharArray())).get() * 0.1;
 			logger.info("Alert_SuspectedCollision {}",Alert_SuspectedCollision);
 			
 		} catch (DecoderException e) {
@@ -147,7 +147,7 @@ public class VehicleAlertData extends AdapterBase implements OBDDataSection {
 		Alert_VibrationAfterIgnitionOFF_str = alert_VibrationAfterIgnitionOFF_str;
 		try {
 			logger.info("Alert_VibrationAfterIgnitionOFF_str {}",Alert_VibrationAfterIgnitionOFF_str);
-			this.Alert_VibrationAfterIgnitionOFF = Short.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(Alert_VibrationAfterIgnitionOFF_str)).getShort());
+			this.Alert_VibrationAfterIgnitionOFF = Short.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(Alert_VibrationAfterIgnitionOFF_str.toCharArray())).getShort());
 			logger.info("Alert_VibrationAfterIgnitionOFF {}",Alert_VibrationAfterIgnitionOFF);
 			
 		} catch (DecoderException e) {

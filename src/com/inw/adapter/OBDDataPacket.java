@@ -339,7 +339,7 @@ public class OBDDataPacket extends AdapterBase {
 	public void setVehVIN_VINLength(String vehVIN_VINLength) {
 		this.vehVIN_VINLength = vehVIN_VINLength;
 		try {
-			vehVIN_Length_int = (int)ByteBuffer.wrap(Hex.decodeHex(this.vehVIN_VINLength)).get();
+			vehVIN_Length_int = (int)ByteBuffer.wrap(Hex.decodeHex(this.vehVIN_VINLength.toCharArray())).get();
 			logger.info("vehVIN_VINLength_int : ", vehVIN_Length_int);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);
@@ -356,7 +356,7 @@ public class OBDDataPacket extends AdapterBase {
 		this.vehVIN_VINCode = null;
 		// Test code to convert IMEI number received over TCP bytes into its digit form.
 		try {
-			byte[] vinBytes = Hex.decodeHex(vehVIN_VINCodeHexStr);
+			byte[] vinBytes = Hex.decodeHex(vehVIN_VINCodeHexStr.toCharArray());
 			this.vehVIN_VINCode = new String(vinBytes);
 		} catch (DecoderException e1) {
 			logger.error(e1.getStackTrace().toString());

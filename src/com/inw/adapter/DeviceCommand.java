@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.zip.Adler32;
 import java.util.zip.Checksum;
 
@@ -158,7 +159,7 @@ public class DeviceCommand extends AdapterBase {
 		
 		try {
 			
-			byte[] deviceParamBytes = Hex.decodeHex(frameHeader + frameData);
+			byte[] deviceParamBytes = Hex.decodeHex((frameHeader + frameData).toCharArray());
 		
 			Checksum checksum = new Adler32();
 			checksum.update(deviceParamBytes, 0, deviceParamBytes.length);
@@ -170,20 +171,21 @@ public class DeviceCommand extends AdapterBase {
 			
 			String srvrReqPacket = frameData + checksumString;
 			if(srvrReqPacket.length() % 32 !=0 ) { // bytes to encrypt should be a multiple of 16 length
-				String padd = "F".repeat(32 - (srvrReqPacket.length() % 32) );
+//				String padd = "F".repeat(32 - (srvrReqPacket.length() % 32) );
+				String padd = String.join("", Collections.nCopies(32 - (srvrReqPacket.length() % 32), "F"));
 				srvrReqPacket = srvrReqPacket + padd;
 			}
 			
 			logger.info("Server -> Device request Packet " + srvrReqPacket);
 			
 			String mcuKey = MCUKeyManager.getInstance().getMCUKeyForIMEINumber(recvPkt.getDeviceId());		
-			String encryptedPacket = Hex.encodeHexString(encrypt(Hex.decodeHex(srvrReqPacket), Hex.decodeHex(mcuKey)));
+			String encryptedPacket = Hex.encodeHexString(encrypt(Hex.decodeHex(srvrReqPacket.toCharArray()), Hex.decodeHex(mcuKey.toCharArray())));
 	
 			String finalReqPacket = ack.getHeader() + frameHeader + encryptedPacket + "AAAA";
 			logger.info("Server -> Device Encrypted request Packet " + finalReqPacket);
 
 			DataOutputStream dout = new DataOutputStream(obdSoock.getOutputStream());
-			dout.write(Hex.decodeHex(finalReqPacket));
+			dout.write(Hex.decodeHex(finalReqPacket.toCharArray()));
 			dout.flush();
 		} catch (DecoderException e) {
 			logger.error("Exception occured: ",e);

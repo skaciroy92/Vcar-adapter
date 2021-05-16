@@ -165,7 +165,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		try {
 			byte[] distanceBytes;
 
-			distanceBytes = Hex.decodeHex(drivingDistance_str);
+			distanceBytes = Hex.decodeHex(drivingDistance_str.toCharArray());
 			String distanceBin1 = String.format("%8s", Integer.toBinaryString(distanceBytes[0] & 0xFF)).replace(' ', '0')
 					+ String.format("%8s", Integer.toBinaryString(distanceBytes[1] & 0xFF)).replace(' ', '0')
 					+ String.format("%8s", Integer.toBinaryString(distanceBytes[2] & 0xFF)).replace(' ', '0');
@@ -195,7 +195,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		try {
 			byte[] fuelConsBytes;
 
-			fuelConsBytes = Hex.decodeHex(FuelConsumption_str);
+			fuelConsBytes = Hex.decodeHex(FuelConsumption_str.toCharArray());
 			String fuelBin1 = String.format("%8s", Integer.toBinaryString(fuelConsBytes[0] & 0xFF)).replace(' ', '0')
 					+ String.format("%8s", Integer.toBinaryString(fuelConsBytes[1] & 0xFF)).replace(' ', '0')
 					+ String.format("%8s", Integer.toBinaryString(fuelConsBytes[2] & 0xFF)).replace(' ', '0');
@@ -219,7 +219,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		MaximumSpeed_str = maximumSpeed_str;
 		try {
 			logger.info("Trip Max Speed Hex {}",MaximumSpeed_str);
-			this.MaximumSpeed_int = Short.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(MaximumSpeed_str)).getShort());
+			this.MaximumSpeed_int = Short.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(MaximumSpeed_str.toCharArray())).getShort());
 			logger.info("MaximumSpeed_int {}",MaximumSpeed_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
@@ -236,7 +236,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		IdleTime_str = idleTime_str;
 		try {
 			logger.info("Trip IdleTime_str Hex {}",IdleTime_str);
-			this.IdleTime_int = Short.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(IdleTime_str)).getShort());
+			this.IdleTime_int = Short.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(IdleTime_str.toCharArray())).getShort());
 			logger.info("IdleTime_int {}",IdleTime_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
@@ -253,7 +253,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		IdleFuelConsumption_str = idleFuelConsumption_str;
 		try {
 			logger.info("Trip IdleFuelConsumption_str Hex {}",IdleFuelConsumption_str);
-			this.idleFuelConsumption_int = Short.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(IdleFuelConsumption_str)).getShort());
+			this.idleFuelConsumption_int = Short.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(IdleFuelConsumption_str.toCharArray())).getShort());
 			logger.info("idleFuelConsumption_int {}",idleFuelConsumption_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
@@ -270,7 +270,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		NumRapidAcceleration_str = numRapidAcceleration_str;
 		try {
 			logger.info("Trip NumRapidAcceleration_str Hex {}",NumRapidAcceleration_str);
-			this.NumRapidAccelerations_int = Byte.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(NumRapidAcceleration_str)).get());
+			this.NumRapidAccelerations_int = Byte.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(NumRapidAcceleration_str.toCharArray())).get());
 			logger.info("NumRapidAccelerations_int {}",NumRapidAccelerations_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
@@ -287,7 +287,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		NumRapidDeceleration_str = numRapidDeceleration_str;
 		try {
 			logger.info("Trip NumRapidDeceleration_str Hex {}",NumRapidDeceleration_str);
-			this.NumRapidDecelerations_int = Byte.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(NumRapidDeceleration_str)).get());
+			this.NumRapidDecelerations_int = Byte.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(NumRapidDeceleration_str.toCharArray())).get());
 			logger.info("NumRapidDecelerations_int {}",NumRapidDecelerations_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
@@ -304,7 +304,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		NumRapidSharpTurns_str = numRapidSharpTurns_str;
 		try {
 			logger.info("Trip NumRapidSharpTurns_str Hex {}",NumRapidSharpTurns_str);
-			this.NumRapidSharpTurns_int = Byte.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(NumRapidSharpTurns_str)).get());
+			this.NumRapidSharpTurns_int = Byte.toUnsignedInt(ByteBuffer.wrap(Hex.decodeHex(NumRapidSharpTurns_str.toCharArray())).get());
 			logger.info("NumRapidSharpTurns_int {}",NumRapidSharpTurns_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
@@ -321,7 +321,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		HistoricalTotalMileage_str = historicalTotalMileage_str;
 		try {
 			logger.info("Trip historicalTotalMileage_str Hex {}",historicalTotalMileage_str);
-			this.HistoricaTotalMileage_int = Integer.toUnsignedLong(ByteBuffer.wrap(Hex.decodeHex(historicalTotalMileage_str)).getInt());
+			this.HistoricaTotalMileage_int = Integer.toUnsignedLong(ByteBuffer.wrap(Hex.decodeHex(historicalTotalMileage_str.toCharArray())).getInt());
 			logger.info("HistoricaTotalMileage_int {}",HistoricaTotalMileage_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
@@ -338,7 +338,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		HistoricalTotalFuelConsumption_str = historicalTotalFuelConsumption_str;
 		try {
 			logger.info("Trip HistoricalTotalFuelConsumption_str Hex {}",HistoricalTotalFuelConsumption_str);
-			this.HistoricalTotalFuelConsumption_int = Integer.toUnsignedLong(ByteBuffer.wrap(Hex.decodeHex(HistoricalTotalFuelConsumption_str)).getInt());
+			this.HistoricalTotalFuelConsumption_int = Integer.toUnsignedLong(ByteBuffer.wrap(Hex.decodeHex(HistoricalTotalFuelConsumption_str.toCharArray())).getInt());
 			logger.info("HistoricalTotalFuelConsumption_int {}",HistoricalTotalFuelConsumption_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());
@@ -355,7 +355,7 @@ public class VehTripSummaryData extends AdapterBase implements OBDDataSection {
 		HistoricalTotalDrivingTime_str = historicalTotalDrivingTime_str;
 		try {
 			logger.info("Trip HistoricalTotalDrivingTime_str Hex {}",HistoricalTotalDrivingTime_str);
-			this.HistoricalDrivingTime_int = Integer.toUnsignedLong(ByteBuffer.wrap(Hex.decodeHex(HistoricalTotalDrivingTime_str)).getInt());
+			this.HistoricalDrivingTime_int = Integer.toUnsignedLong(ByteBuffer.wrap(Hex.decodeHex(HistoricalTotalDrivingTime_str.toCharArray())).getInt());
 			logger.info("HistoricalDrivingTime_int {}",HistoricalDrivingTime_int);
 		} catch (DecoderException e) {
 			OBDDataPacket.logger.error(e.getStackTrace().toString());

@@ -39,7 +39,7 @@ public class SimWifiInfo extends AdapterBase {
 		byte[] verBytes;
 		try {
 			logger.info("simPhoneNumber HexStr {}",hexStr);
-			verBytes = Hex.decodeHex(hexStr);
+			verBytes = Hex.decodeHex(hexStr.toCharArray());
 			String binString = String.format("%8s", Integer.toBinaryString(verBytes[0] & 0xFF)).replace(' ', '0')
 					+ String.format("%8s", Integer.toBinaryString(verBytes[1] & 0xFF)).replace(' ', '0');
 			
@@ -60,7 +60,7 @@ public class SimWifiInfo extends AdapterBase {
 	public void setSimIMSINumber(String hexStr) {
 		try {
 			logger.info("simIMSINumber HexStr {}",hexStr);			
-			byte[] strBytes = Hex.decodeHex(hexStr);
+			byte[] strBytes = Hex.decodeHex(hexStr.toCharArray());
 			this.simIMSINumber = new String(strBytes);
 			logger.info("simIMSINumber  {}",this.simIMSINumber);
 		} catch (DecoderException e) {
@@ -75,7 +75,7 @@ public class SimWifiInfo extends AdapterBase {
 	public void setSimICCIDNumber(String hexStr) {
 		try {
 			logger.info("simICCIDNumber HexStr {}",hexStr);
-			byte[] strBytes = Hex.decodeHex(hexStr);
+			byte[] strBytes = Hex.decodeHex(hexStr.toCharArray());
 			this.simICCIDNumber = new String(strBytes);
 			logger.info("simICCIDNumber  {}",this.simICCIDNumber);
 			
@@ -90,7 +90,7 @@ public class SimWifiInfo extends AdapterBase {
 	public void setWifiMACid(String hexStr) {
 		try {
 			logger.info("WifiMACid HexStr {}",hexStr);
-			byte[] strBytes = Hex.decodeHex(hexStr);
+			byte[] strBytes = Hex.decodeHex(hexStr.toCharArray());
 			this.wifiMACid = new String(strBytes);
 			logger.info("wifiMACid  {}",this.wifiMACid);
 			
@@ -105,7 +105,7 @@ public class SimWifiInfo extends AdapterBase {
 	public void setBluetoothMACid(String hexStr) {
 		try {
 			logger.info("bluetoothMACid HexStr {}",hexStr);
-			byte[] strBytes = Hex.decodeHex(hexStr);
+			byte[] strBytes = Hex.decodeHex(hexStr.toCharArray());
 			this.bluetoothMACid = new String(strBytes);
 			logger.info("bluetoothMACid  {}",this.bluetoothMACid);
 			
@@ -126,7 +126,7 @@ public class SimWifiInfo extends AdapterBase {
 		
 	public void setPhoneNumberLength(String lengthHexStr) {
 		try {
-			phoneNumberLength = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr)).get();
+			phoneNumberLength = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr.toCharArray())).get();
 			logger.info("phoneNumberLength : ", phoneNumberLength);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);
@@ -138,7 +138,7 @@ public class SimWifiInfo extends AdapterBase {
 	
 	public void setIccidLength(String lengthHexStr) {
 		try {
-			iccidLength = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr)).get();
+			iccidLength = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr.toCharArray())).get();
 			logger.info("iccidLength : ", iccidLength);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);
@@ -149,7 +149,7 @@ public class SimWifiInfo extends AdapterBase {
 	}	
 	public void setImsiLength(String lengthHexStr) {
 		try {
-			imsiLength = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr)).get();
+			imsiLength = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr.toCharArray())).get();
 			logger.info("ImsiLength : ", imsiLength);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);
@@ -160,7 +160,7 @@ public class SimWifiInfo extends AdapterBase {
 	}
 	public void setWifiMACidLength(String lengthHexStr) {
 		try {
-			wifiMACidLength = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr)).get();
+			wifiMACidLength = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr.toCharArray())).get();
 			logger.info("wifiMACidLength : ", wifiMACidLength);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);
@@ -171,7 +171,7 @@ public class SimWifiInfo extends AdapterBase {
 	}
 	public void setBluetoothMACidLength(String lengthHexStr) {
 		try {
-			bluetoothMACidLength = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr)).get();
+			bluetoothMACidLength = (int)ByteBuffer.wrap(Hex.decodeHex(lengthHexStr.toCharArray())).get();
 			logger.info("XXXXXX : ", bluetoothMACidLength);
 		} catch (DecoderException e) {
 			logger.error("Exception occured : ",e);
