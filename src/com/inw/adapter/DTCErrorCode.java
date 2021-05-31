@@ -68,23 +68,24 @@ public class DTCErrorCode extends AdapterBase implements OBDDataSection {
 						ValueCollection valcol = new ValueCollection();
 						valcol.SetStringValue("ErrorCode", errorCode);
 						String descr = getDTCErrorCodesMap().get(errorCode);
-						valcol.SetStringValue("ErrorDescription", descr);
+						valcol.SetStringValue("ErrorDescription", descr == null ? "" : descr);
 						dtcErroCodesInfoTbl.addRow(valcol);
-						dtcOBDFaultCodes.put(errorCode, descr);
+						dtcOBDFaultCodes.put(errorCode, descr == null ? "" : descr);
 					}
 				}
 			}
-			{
-				int prvCodeLen = dtcBytes[obdCodeLen+1];
-				for(int i =obdCodeLen+2 ; i <= (obdCodeLen + 2 + prvCodeLen *  3); i+=3) {
-					//byte[] dtcCode = Arrays.copyOfRange(dtcBytes, i, i+2);
-					byte stateCode = dtcBytes[i+2];
-					if(stateCode == 0) {
-						//String errorCode  = "P" + Hex.encodeHexString(dtcCode);
-						//dtcPrivateFaultCodes.put(errorCode, getDTCErrorCodesMap().get(errorCode));
-					}				
-				}
-			}
+			// TODO: bỏ đoạn code này: thừa, dẫn đến lỗi xử lý mảng
+//			{
+//				int prvCodeLen = dtcBytes[obdCodeLen+1];
+//				for(int i =obdCodeLen+2 ; i <= (obdCodeLen + 2 + prvCodeLen *  3); i+=3) {
+//					//byte[] dtcCode = Arrays.copyOfRange(dtcBytes, i, i+2);
+//					byte stateCode = dtcBytes[i+2];
+//					if(stateCode == 0) {
+//						//String errorCode  = "P" + Hex.encodeHexString(dtcCode);
+//						//dtcPrivateFaultCodes.put(errorCode, getDTCErrorCodesMap().get(errorCode));
+//					}
+//				}
+//			}
 			
 		} catch (Exception e) {
 			logger.error("Error occured : ",e);
@@ -105,7 +106,7 @@ public class DTCErrorCode extends AdapterBase implements OBDDataSection {
 			        while ((line = in.readLine()) != null) {
 			            String columns[] = line.split(",");
 			            if (!dtcErroCodeMap.containsKey(columns[0])) {
-			            	dtcErroCodeMap.put(columns[0], columns[1]);
+			            	dtcErroCodeMap.put(columns[0].replaceAll("\"", ""), columns[1].replaceAll("\"", ""));
 			            }
 			        }	        	
 					in.close();

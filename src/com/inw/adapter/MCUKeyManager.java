@@ -42,7 +42,8 @@ public class MCUKeyManager extends AdapterBase {
     { 
     	//mcuKeys.put("861632040235150", "8626C921B2FCC6DC61FCD306EBFB2D44A1D2769314A5E01603323697CBD148C7"); //Ravi's
     	//mcuKeys.put("861632040234732", "5DBAC03E22ED7BCF3A1D99CA06EDF7BBB21937AC49B271C81413A41E2F1AED51"); //Peter's
-    } 
+    	mcuKeys.put("869849040027153", "B7993C34495CACEC027836BD73F711434C89AA6A17553E5FFF73B810038B5ECA"); //Peter's
+    }
   
     // static method to create instance of Singleton class 
     public static MCUKeyManager getInstance() 

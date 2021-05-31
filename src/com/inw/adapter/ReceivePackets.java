@@ -345,7 +345,7 @@ public class ReceivePackets extends AdapterBase {
 	}
 	
 	private void processDTCErrorData(String actualPacketString, OBDDataPacket dataPacket) {
-		logger.info("Reading DTC Error data !!!!!!!!!!!!!!");
+		logger.info("Reading DTC Error data !!!!!!!!!!!!!!: " + actualPacketString);
 		dataPacket.initDTCErrorData();
 		dataPacket.getDTCErrorData().setDTCErrorOccuranceTime_str(actualPacketString.substring(62,70));
 		dataPacket.getDTCErrorData().setDTCErrorCode_str(actualPacketString.substring(70));
